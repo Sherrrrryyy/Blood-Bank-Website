@@ -32,9 +32,9 @@ const Navbar = () => {
             <a href="/map" className="text-white hover:text-red-200 transition duration-300">Map</a>
           </div>
 
-          {/* Login/Signup and Profile Icon */}
+          {/* Signup and Profile Icon */}
           <div className="flex items-center space-x-4">
-            <a href="/signup" className="text-red-900 bg-red-200 p-2 rounded-full hover:bg-red-900 hover:text-red-200 transition duration-300">Signup</a>
+            <a href="/signup" className="text-red-200">Signup</a>
             <div className="relative">
               <button onClick={toggleDropdown} className="text-white hover:text-red-200 transition duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
