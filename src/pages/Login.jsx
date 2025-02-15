@@ -1,42 +1,73 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const userData = { email, password };
-        await axios.post('http://localhost:5000/api/login', userData);
-        // Handle success or error
+        try {
+            const userData = { email: formData.email, password: formData.password };
+            await axios.post('http://localhost:5000/api/login', userData);
+            navigate('/');
+        } catch (error) {
+            console.error('Login error:', error);
+        }
     };
 
+
     return (
-        <div className="container mx-auto p-6">
-            <div className="bg-white shadow-lg rounded-lg p-6">
-                <h2 className="text-2xl font-bold mb-4">Login</h2>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-red-50 to-red-100">
+            <div className="bg-white shadow-xl rounded-lg p-8 w-full max-w-md">
+                <h2 className="text-3xl font-bold text-red-700 mb-6 text-center">Blood Bank Login</h2>
+
                 <form onSubmit={handleSubmit}>
                     <input
                         type="email"
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        name="email"
+                        placeholder="Email Address"
+                        value={formData.email}
+                        onChange={handleChange}
                         required
-                        className="border border-gray-300 p-3 mb-4 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                        className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                     <input
                         type="password"
+                        name="password"
                         placeholder="Password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={formData.password}
+                        onChange={handleChange}
                         required
-                        className="border border-gray-300 p-3 mb-4 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                        className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
-                    <button type="submit" className="bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 transition duration-200">
+                    <button type="submit" className="w-full bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition duration-200 font-semibold">
                         Login
                     </button>
+                    <p className="text-center mt-4 text-gray-600">
+                        Don't have an account?{' '}
+                        <button 
+                            onClick={() => navigate('/register')}
+                            className="text-red-600 hover:text-red-700 font-semibold"
+                        >
+                            Register here
+                        </button>
+                    </p>
                 </form>
             </div>
         </div>
+
     );
 };
 
