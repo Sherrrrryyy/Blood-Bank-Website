@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -16,58 +15,81 @@ const Login = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            const userData = { email: formData.email, password: formData.password };
-            await axios.post('http://localhost:5000/api/login', userData);
-            navigate('/');
-        } catch (error) {
-            console.error('Login error:', error);
-        }
+        // Handle login logic here
+        navigate('/');
     };
 
-
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-red-50 to-red-100">
-            <div className="bg-white shadow-xl rounded-lg p-8 w-full max-w-md">
-                <h2 className="text-3xl font-bold text-red-700 mb-6 text-center">Blood Bank Login</h2>
-
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                        className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                    />
-                    <button type="submit" className="w-full bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition duration-200 font-semibold">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-500 to-red-700 p-6">
+            <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+                <div className="p-8">
+                    <h2 className="text-3xl font-bold text-red-700 mb-6 text-center">
                         Login
-                    </button>
-                    <p className="text-center mt-4 text-gray-600">
-                        Don't have an account?{' '}
-                        <button 
-                            onClick={() => navigate('/register')}
-                            className="text-red-600 hover:text-red-700 font-semibold"
+                    </h2>
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1 text-left">
+                                Email Address
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="john@example.com"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1 text-left">
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="••••••••"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-all font-semibold mt-4"
                         >
-                            Register here
+                            Login
                         </button>
-                    </p>
-                </form>
+
+                        <div className="flex items-center my-6">
+                            <div className="flex-1 h-px bg-gray-300"></div>
+                            <span className="px-4 text-gray-500">or</span>
+                            <div className="flex-1 h-px bg-gray-300"></div>
+                        </div>
+
+                       
+
+                        <p className="text-center mt-6 text-gray-600">
+                            Don't have an account?{' '}
+                            <button
+                                onClick={() => navigate('/register')}
+                                className="text-red-600 hover:text-red-700 font-semibold"
+                            >
+                                Register here
+                            </button>
+                        </p>
+                    </form>
+                </div>
             </div>
         </div>
-
     );
 };
 
