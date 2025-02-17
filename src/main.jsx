@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import DonationRequest from './components/DonationRequest';
 import Chat from './components/Chat';
+import DonationForm from './pages/DonationForm.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/donation" element={<DonationRequest />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/DonationForm" element={<DonationForm />} />
       </Routes>
     </Router>
   </StrictMode>,
