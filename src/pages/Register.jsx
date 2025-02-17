@@ -25,7 +25,10 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        localStorage.setItem('user', JSON.stringify(formData));
+        const local = localStorage.setItem('user', JSON.stringify(formData));
+        if(!local){
+
+        }
         navigate('/login');
     };
 
