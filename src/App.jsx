@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import BloodDonationInfo from './components/BloodDonationInfo';
 import HowItWorks from './components/HowItWorks';
+import Stats from './components/Stats';
+import Testimonials from './components/Testimonials';
 
 
 function App() {
@@ -10,8 +12,10 @@ function App() {
     <>
       <Navbar />
       <Hero />
-      <BloodDonationInfo />
       <HowItWorks />
+      <BloodDonationInfo />
+      <Testimonials />
+      <Stats />
     </>
   );
 }
