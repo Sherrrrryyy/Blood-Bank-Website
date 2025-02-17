@@ -1,5 +1,5 @@
  import React from 'react';
-// import bloodDonationImage from '../assets/blood-donation.jpg'; // Assuming we'll add this image
+import bloodDonationImage from '../assets/blood-donation.jpg'; // Assuming we'll add this image
 
 const BloodDonationInfo = () => {
     return (
@@ -7,6 +7,7 @@ const BloodDonationInfo = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
                     <img 
+                        src={bloodDonationImage} 
                         alt="Blood Donation" 
                         className="w-full h-auto rounded-lg"
                     />
