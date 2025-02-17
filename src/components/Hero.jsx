@@ -22,6 +22,12 @@ const Hero = () => {
         >
          Donate Now
         </a>
+        <a
+          className="block w-full rounded-sm border border-red-700 px-12 py-3 text-sm font-medium text-red-700 hover:bg-gray-50 shadow-sm focus:ring-3 focus:outline-hidden sm:w-auto"
+          href="/DonationForm"
+        >
+         Request Now
+        </a>
 
      
       </div>

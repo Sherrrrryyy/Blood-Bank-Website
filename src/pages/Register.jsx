@@ -9,8 +9,10 @@ const Register = () => {
         password: '',
         phone: '',
         bloodGroup: '',
-        city: ''
+        city: '',
+        role: ''
     });
+
 
     const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
@@ -135,6 +137,35 @@ const Register = () => {
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
                                 />
                             </div>
+
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
+                                    Register as
+                                </label>
+                                <div className="flex items-center">
+                                    <input
+                                        type="radio"
+                                        id="donor"
+                                        name="role"
+                                        value="Donor"
+                                        onChange={handleChange}
+                                        className="mr-2"
+                                        required
+                                    />
+                                    <label htmlFor="donor" className="mr-4">Donor</label>
+                                    <input
+                                        type="radio"
+                                        id="patient"
+                                        name="role"
+                                        value="Patient"
+                                        onChange={handleChange}
+                                        className="mr-2"
+                                        required
+                                    />
+                                    <label htmlFor="patient">Patient</label>
+                                </div>
+                            </div>
+
                         </div>
 
                         <button
