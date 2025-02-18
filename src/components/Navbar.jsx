@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isUserExist, setIsUserExist] = useState(false);
+
+
+  useEffect(() => {
+    const getUser = localStorage.getItem('user')
+    console.log(getUser);
+
+    if (getUser) {
+      console.log('User haiga');
+      setIsUserExist(true);
+    } else {
+      console.log('User nai hai');
+      setIsUserExist(false);
+    }
+
+  }, [])
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -36,29 +52,34 @@ const Navbar = () => {
 
           {/* Signup and Profile Icon */}
           <div className="flex items-center space-x-4">
-            <a href="/signup" className="group relative inline-block text-sm font-medium text-black focus:ring-3 focus:outline-hidden" >
-              <span className="absolute inset-0 translate-x-0 translate-y-0 bg-red-600 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" >
-              </span>
-              <span className="relative block border border-current bg-white px-8 py-3"> SIGNUP </span>
-            </a>
+            {!isUserExist && (
+              <a href="/signup" className="group relative inline-block text-sm font-medium text-black focus:ring-3 focus:outline-hidden" >
+                <span className="absolute inset-0 translate-x-0 translate-y-0 bg-red-600 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" >
+                </span>
+                <span className="relative block border border-current bg-white px-8 py-3"> SIGNUP </span>
+              </a>
+            )}
 
-            <div className="relative">
-              <button onClick={toggleDropdown} className="text-black hover:text-red-600 transition duration-300">
+            {isUserExist && (
+              <div className="relative">
+                <button onClick={toggleDropdown} className="text-black hover:text-red-600 transition duration-300">
+                  <svg xmlns="http://www.w3.org/6000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </button>
+                {/* Dropdown for User Activities */}
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
+                    <a href="/profile" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Profile</a>
+                    <a href="/activities" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Activities</a>
+                    <a href="/logout" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Logout</a>
 
-                <svg xmlns="http://www.w3.org/6000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </button>
-              {/* Dropdown for User Activities */}
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
-                  <a href="/profile" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Profile</a>
-                  <a href="/activities" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Activities</a>
-                  <a href="/logout" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Logout</a>
+                  </div>
+                )}
+              </div>
+            )}
 
-                </div>
-              )}
-            </div>
+
           </div>
 
           {/* Mobile Menu Button */}
