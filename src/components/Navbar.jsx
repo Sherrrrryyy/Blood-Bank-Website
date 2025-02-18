@@ -54,7 +54,7 @@ const Navbar = () => {
           {/* Signup and Profile Icon */}
           <div className="flex items-center space-x-4">
             {!isUserExist && (
-              <Link href="/signup" className="group relative inline-block text-sm font-medium text-black focus:ring-3 focus:outline-hidden" >
+              <Link to="/signup" className="group relative inline-block text-sm font-medium text-black focus:ring-3 focus:outline-hidden" >
                 <span className="absolute inset-0 translate-x-0 translate-y-0 bg-red-600 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" >
                 </span>
                 <span className="relative block border border-current bg-white px-8 py-3"> SIGNUP </span>
