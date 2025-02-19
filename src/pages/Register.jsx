@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const Register = () => {
     const navigate = useNavigate();
@@ -23,14 +25,19 @@ const Register = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const local = localStorage.setItem('user', JSON.stringify(formData));
-        if(!local){
-
+        try {
+            const response = await axios.post('http://localhost:5000/api/users/register', formData);
+            const { token } = response.data;
+            localStorage.setItem('token', token);
+            navigate('/login');
+        } catch (error) {
+            console.error('Registration failed:', error.response?.data?.message || error.message);
+            alert('Registration failed. Please try again.');
         }
-        navigate('/login');
     };
+
 
     return (
         <div className="min-h-screen flex items-center justify-center p-6">

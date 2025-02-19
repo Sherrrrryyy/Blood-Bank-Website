@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const Login = () => {
     const navigate = useNavigate();
@@ -15,11 +17,23 @@ const Login = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle login logic here
-        navigate('/');
+        try {
+            const response = await axios.post('http://localhost:5000/api/users/login', {
+                email: formData.email,
+                password: formData.password
+            });
+            const { token, result } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(result));
+            navigate('/');
+        } catch (error) {
+            console.error('Login failed:', error.response?.data?.message || error.message);
+            alert('Login failed. Please check your credentials and try again.');
+        }
     };
+
 
     return (
         <div className="min-h-screen flex items-center justify-center">
