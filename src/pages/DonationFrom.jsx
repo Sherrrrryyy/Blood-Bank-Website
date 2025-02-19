@@ -1,6 +1,7 @@
 import React from 'react'
 
-const DonationFrom = () => {
+const DonationFrom = async () => {
+
   return (
     <div>
       <h1>Donation Form</h1>
