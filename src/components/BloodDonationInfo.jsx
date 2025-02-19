@@ -1,5 +1,5 @@
  import React from 'react';
-import bloodDonationImage from '../assets/blood-donation.jpg'; // Assuming we'll add this image
+import bloodDonationImage from '../assets/blood-donation.jpg'; 
 
 const BloodDonationInfo = () => {
     return (
