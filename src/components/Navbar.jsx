@@ -105,7 +105,6 @@ const Navbar = () => {
             <a href="/about" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">About</a>
             <a href="/donors" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">Donors List</a>
             <a href="/chat" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">Chat</a>
-            <a href="/map" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">Map</a>
           </div>
         </div>
       )}
