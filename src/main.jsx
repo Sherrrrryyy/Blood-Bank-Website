@@ -6,21 +6,14 @@ import './index.css'
 import './App.css';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import DonationRequest from './components/DonationRequest';
-import Chat from './components/Chat';
-import DonationForm from './pages/DonationFrom.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/donors" element={<DonationForm />} />
-        <Route path="/chat" element={<Chat />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/donation" element={<DonationRequest />} />
-        <Route path="/DonationForm" element={<DonationForm />} />
       </Routes>
     </Router>
   </StrictMode>,
