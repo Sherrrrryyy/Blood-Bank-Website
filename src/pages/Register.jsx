@@ -42,9 +42,10 @@ const Register = () => {
                 type: 'new_patient',
                 userId: user._id
               });
-              addNotification('New patient registered');
+              addNotification('New patient needs blood!', user._id);
               navigate('/login');
             }
+
 
         } catch(error){
             console.error('Registration failed:', error.response?.data?.message || error.message);
