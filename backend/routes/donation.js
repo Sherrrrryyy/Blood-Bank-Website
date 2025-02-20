@@ -4,7 +4,7 @@ import Donation from '../models/Donation.js';
 const router = express.Router();
 
 // Create donation request
-router.post('/', async (req, res) => {
+router.post('/donors', async (req, res) => {
   try {
     const { bloodType, location, requester } = req.body;
     
