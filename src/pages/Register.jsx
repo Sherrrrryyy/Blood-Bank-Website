@@ -45,8 +45,6 @@ const Register = () => {
               addNotification('New patient needs blood!', user._id);
               navigate('/login');
             }
-
-
         } catch(error){
             console.error('Registration failed:', error.response?.data?.message || error.message);
             alert('Registration failed. Please try again.');

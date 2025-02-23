@@ -10,7 +10,6 @@ const Navbar = () => {
 
   useEffect(() => {
     const getUser = localStorage.getItem('user');
-    console.log(getUser);
 
     if (getUser) {
       console.log('User exists');

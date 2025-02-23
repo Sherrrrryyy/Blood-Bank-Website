@@ -6,9 +6,10 @@ import './index.css'
 import './App.css';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import { NotificationProvider } from './context/NotificationContext.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <NotificationProvider>
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
@@ -16,5 +17,5 @@ createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
-  </StrictMode>,
+  </NotificationProvider>,
 )
