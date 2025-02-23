@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NotificationContext } from "../context/NotificationContext";
 
 const Navbar = () => {
@@ -8,7 +8,10 @@ const Navbar = () => {
   const [isUserExist, setIsUserExist] = useState(false);
   const { notifications } = useContext(NotificationContext);
 
+const navigate = useNavigate();
+
   useEffect(() => {
+  
     const getUser = localStorage.getItem('user');
 
     if (getUser) {
@@ -27,6 +30,14 @@ const Navbar = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const logOutUser = () =>{
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    navigate('/login');
+    setIsUserExist(false);
+  
+  }
 
   return (
     <nav className="rounded-full w-full">
@@ -81,7 +92,7 @@ const Navbar = () => {
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
                       <a href="/profile" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Profile</a>
                       <a href="/activities" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Activities</a>
-                      <a href="/logout" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Logout</a>
+                      <button><a onClick={logOutUser} className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Logout</a></button>
                     </div>
                   )}
                 </div>

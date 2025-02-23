@@ -118,7 +118,7 @@ const Register = () => {
                                     type="tel"
                                     id="phone"
                                     name="phone"
-                                    placeholder="+1234567890"
+                                    placeholder="+92"
                                     value={formData.phone}
                                     onChange={handleChange}
                                     required
@@ -153,7 +153,7 @@ const Register = () => {
                                     type="text"
                                     id="city"
                                     name="city"
-                                    placeholder="New York"
+                                    placeholder="Karachi"
                                     value={formData.city}
                                     onChange={handleChange}
                                     required
