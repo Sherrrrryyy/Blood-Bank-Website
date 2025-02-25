@@ -15,10 +15,8 @@ const navigate = useNavigate();
     const getUser = localStorage.getItem('user');
 
     if (getUser) {
-      console.log('User exists');
       setIsUserExist(true);
     } else {
-      console.log('User does not exist');
       setIsUserExist(false);
     }
   }, []);

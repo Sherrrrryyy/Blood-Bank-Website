@@ -4,9 +4,9 @@ import axios from 'axios';
 import { NotificationContext } from '../context/NotificationContext';
 
 const Register = () => {
-  const navigate = useNavigate();
-  const { addNotification } = useContext(NotificationContext);
-  const [formData, setFormData] = useState({
+    const navigate = useNavigate();
+    const { addNotification } = useContext(NotificationContext);
+    const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
@@ -14,7 +14,7 @@ const Register = () => {
         bloodGroup: '',
         city: '',
         role: ''
-      });
+    });
 
 
     const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
@@ -33,19 +33,19 @@ const Register = () => {
             const { token, user } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
-            
+
             if (formData.role === 'Donor') {
-              navigate('/donors');
+                navigate('/donors');
             } else {
-              // Trigger notification for patient registration
-              await axios.post('http://localhost:5000/api/notifications', {
-                type: 'new_patient',
-                userId: user._id
-              });
-              addNotification('New patient needs blood!', user._id);
-              navigate('/login');
+                // Trigger notification for patient registration
+                await axios.post('http://localhost:5000/api/notifications', {
+                    type: 'new_patient',
+                    userId: user._id
+                });
+                addNotification('New patient needs blood!', user._id);
+                navigate('/login');
             }
-        } catch(error){
+        } catch (error) {
             console.error('Registration failed:', error.response?.data?.message || error.message);
             alert('Registration failed. Please try again.');
         }
@@ -204,7 +204,7 @@ const Register = () => {
                             <div className="flex-1 h-px bg-gray-300"></div>
                         </div>
 
-                       
+
                     </form>
 
                     <p className="text-center mt-6 text-gray-600">

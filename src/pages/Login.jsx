@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 
 const Login = () => {
+
+const Swal = require('sweetalert2')
+
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -30,7 +34,11 @@ const Login = () => {
             navigate('/');
         } catch (error) {
             console.error('Login failed:', error.response?.data?.message || error.message);
-            alert('Login failed. Please check your credentials and try again.');
+            Swal.fire({
+                title: 'This user does not exist',
+                text: ' Signup for continue ',
+                icon: 'error',
+            })
         }
     };
 
