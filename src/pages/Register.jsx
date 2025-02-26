@@ -69,17 +69,19 @@ const Register = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/api/users/register', formData);
-            const { token, user } = response.data;
+           console.log(response);
+           
+            const { token, result } = response.data;
             localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('result', JSON.stringify(result));
 
             if (formData.role === 'Patient') {
                 // Trigger notification for patient registration
                 await axios.post('http://localhost:5000/api/notifications', {
                     type: 'new_patient',
-                    userId: user._id
+                    resultId: result._id
                 });
-                addNotification('New patient needs blood!', user._id);
+                addNotification('New patient needs blood!', result._id);
             }
             navigate('/login');
             Swal.fire({
