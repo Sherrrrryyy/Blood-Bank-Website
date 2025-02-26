@@ -2,8 +2,48 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { NotificationContext } from '../context/NotificationContext';
+import { FaLock, FaClipboard } from 'react-icons/fa'; // Importing icons
+import Swal from 'sweetalert2';
 
 const Register = () => {
+    const generatePassword = () => {
+        let newPassword = "";
+        let length = 12;
+
+        let upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let lowerCase = "abcdefghijklmnopqrstuvwxyz";
+        let number = "1234567890";
+        let speChar = "!@#$%^&*()_/|}{[]?/><";
+
+        const allChar = upperCase + lowerCase + number + speChar;
+
+        let password = "";
+        password += upperCase[Math.floor(Math.random() * upperCase.length)];
+        password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+        password += number[Math.floor(Math.random() * number.length)];
+        password += speChar[Math.floor(Math.random() * speChar.length)];
+
+        while (length > password.length) {
+            password += allChar[Math.floor(Math.random() * allChar.length)];
+        }
+        newPassword = password;
+        setFormData({
+            ...formData,
+            password: newPassword
+            // navigator.clipboard.writeText(formData.password);
+        });
+    };
+
+    const copyToClipboard = () => {
+        let passArea = document.getElementById("password");
+        navigator.clipboard.writeText(passArea.value).then(() => {
+            console.log('Password copied to clipboard');
+        }).catch(err => {
+            console.error('Failed to copy password: ', err);
+        });
+    };
+
+
     const navigate = useNavigate();
     const { addNotification } = useContext(NotificationContext);
     const [formData, setFormData] = useState({
@@ -16,13 +56,12 @@ const Register = () => {
         role: ''
     });
 
-
     const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
     const handleChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     };
 
@@ -34,23 +73,25 @@ const Register = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
 
-            if (formData.role === 'Donor') {
-                navigate('/donors');
-            } else {
+            if (formData.role === 'Patient') {
                 // Trigger notification for patient registration
                 await axios.post('http://localhost:5000/api/notifications', {
                     type: 'new_patient',
                     userId: user._id
                 });
                 addNotification('New patient needs blood!', user._id);
-                navigate('/login');
             }
+            navigate('/login');
+            Swal.fire({
+                title: 'Signup successful',
+                text: 'Login to continue donating',
+                icon: 'success',
+            })
         } catch (error) {
             console.error('Registration failed:', error.response?.data?.message || error.message);
             alert('Registration failed. Please try again.');
         }
     };
-
 
     return (
         <div className="min-h-screen flex items-center justify-center p-6">
@@ -94,7 +135,7 @@ const Register = () => {
                                 />
                             </div>
 
-                            <div className="col-span-2">
+                            <div className="col-span-2 relative">
                                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1 text-left">
                                     Password
                                 </label>
@@ -105,9 +146,11 @@ const Register = () => {
                                     placeholder="••••••••"
                                     value={formData.password}
                                     onChange={handleChange}
+                                    onClick={generatePassword}
                                     required
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all pr-10"
                                 />
+                                <FaClipboard className="absolute right-4 top-10 text-red-500 cursor-pointer" onClick={copyToClipboard} />
                             </div>
 
                             <div className="col-span-2">

@@ -6,8 +6,6 @@ import Swal from 'sweetalert2'
 
 const Login = () => {
 
-const Swal = require('sweetalert2')
-
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -25,20 +23,28 @@ const Swal = require('sweetalert2')
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/api/users/login', {
-                email: formData.email,
-                password: formData.password
+                email: formData.email
             });
+
             const { token, result } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(result));
-            navigate('/');
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successful',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            navigate('/home');
         } catch (error) {
             console.error('Login failed:', error.response?.data?.message || error.message);
             Swal.fire({
-                title: 'This user does not exist',
-                text: ' Signup for continue ',
                 icon: 'error',
-            })
+                title: 'Login Failed',
+                text: 'Invalid email address',
+            });
         }
     };
 
@@ -97,7 +103,7 @@ const Swal = require('sweetalert2')
                             <div className="flex-1 h-px bg-gray-300"></div>
                         </div>
 
-                       
+
 
                         <p className="text-center mt-6 text-gray-600">
                             Don't have an account?{' '}
