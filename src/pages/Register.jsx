@@ -75,14 +75,14 @@ const Register = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('result', JSON.stringify(result));
 
-            if (formData.role === 'Patient') {
-                // Trigger notification for patient registration
-                await axios.post('http://localhost:5000/api/notifications', {
-                    type: 'new_patient',
-                    resultId: result._id
-                });
-                addNotification('New patient needs blood!', result._id);
-            }
+            // if (formData.role === 'Patient') {
+            //     // Trigger notification for patient registration
+            //     await axios.post('http://localhost:5000/api/notifications', {
+            //         type: 'new_patient',
+            //         resultId: result._id
+            //     });
+            //     addNotification('New patient needs blood!', result._id);
+            // }
             navigate('/login');
             Swal.fire({
                 title: 'Signup successful',

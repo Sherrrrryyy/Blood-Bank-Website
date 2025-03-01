@@ -7,6 +7,7 @@ import './App.css';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import { NotificationProvider } from './context/NotificationContext.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 createRoot(document.getElementById('root')).render(
   <NotificationProvider>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Dashboard />} />
       </Routes>
     </Router>
   </NotificationProvider>,

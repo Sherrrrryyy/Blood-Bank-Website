@@ -30,7 +30,7 @@ const navigate = useNavigate();
   };
 
   const logOutUser = () =>{
-    localStorage.removeItem('user');
+    localStorage.removeItem('result');
     localStorage.removeItem('token');
     navigate('/login');
     setIsUserExist(false);
