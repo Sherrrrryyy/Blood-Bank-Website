@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
 
-const DonationFrom = () => {
+const FindDonor = () => {
   const [donors, setDonors] = useState([]);
 
   useEffect(() => {
     const fetchDonors = async () => {
-      const response = await fetch('/api/donors');
-      const data = await response.json();
-      setDonors(data);
+      try {
+        const response = await fetch('/api/donors');
+        const data = await response.json();
+        setDonors(data);
+      } catch (error) {
+        console.error('Error fetching donor data:', error);
+      }
     };
 
     fetchDonors();
   }, []);
 
   return (
-    <div>
+    <div className="donor-list">
       {donors.map((donor) => (
-        <div key={donor.id} className="card">
-          <h2>{donor.name}</h2>
+        <div key={donor._id} className="donor-card">
+          <h3>{donor.name}</h3>
           <p>Blood Type: {donor.bloodType}</p>
-          <p>Location: {donor.location}</p>
           <p>Contact: {donor.contact}</p>
+          <p>Location: {donor.location}</p>
         </div>
       ))}
     </div>
   );
 };
 
-export default DonationFrom;
+export default FindDonor;

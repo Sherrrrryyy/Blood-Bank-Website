@@ -1,51 +1,17 @@
-import express from 'express';
-import Donation from '../models/Donation.js';
-
+const express = require('express');
+const Donor = require('../models/Donor');
 const router = express.Router();
 
-// Create donation request
-router.post('/donors', async (req, res) => {
-  try {
-    const { bloodType, location, requester } = req.body;
-    
-    const newDonation = new Donation({
-      bloodType,
-      location,
-      requester
-    });
-    
-    await newDonation.save();
-    
-    res.status(201).json(newDonation);
-  } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
-    console.error(error);
-  }
-});
-
-// Get all donation requests
+// GET all donors
 router.get('/', async (req, res) => {
   try {
-    const donations = await Donation.find().populate('requester');
-    res.status(200).json(donations);
+    const donors = await Donor.find();
+    res.json(donors);
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
-    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 });
 
-// Get single donation request
-router.get('/:id', async (req, res) => {
-  try {
-    const donation = await Donation.findById(req.params.id).populate('requester');
-    if (!donation) {
-      return res.status(404).json({ message: 'Donation request not found' });
-    }
-    res.status(200).json(donation);
-  } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
-    console.error(error);
-  }
-});
+// Add more routes as needed for CRUD operations
 
-export default router;
+module.exports = router;
