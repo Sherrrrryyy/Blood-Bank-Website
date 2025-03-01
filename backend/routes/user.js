@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import Donor from '../models/Donor.js'; // Import the Donor model
 
 const router = express.Router();
 
@@ -32,6 +33,17 @@ router.post('/register', async (req, res) => {
 
     await newUser.save();
 
+    // Create new donor if the role is Donor
+    if (role === 'Donor') {
+        const newDonor = new Donor({
+            name,
+            bloodType: bloodGroup,
+            contact: phone,
+            location: city,
+        });
+        await newDonor.save();
+    }
+
     // Create token
     const token = jwt.sign(
       { email: newUser.email, id: newUser._id },
@@ -45,6 +57,7 @@ router.post('/register', async (req, res) => {
     console.error(error);
   }
 });
+
 
 // User login
 router.post('/login', async (req, res) => {

@@ -6,7 +6,8 @@ const FindDonor = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        const response = await fetch('/api/donors');
+        const response = await fetch('/api/donations');
+
         const data = await response.json();
         setDonors(data);
       } catch (error) {
