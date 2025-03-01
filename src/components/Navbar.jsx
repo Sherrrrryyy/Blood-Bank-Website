@@ -52,7 +52,8 @@ const navigate = useNavigate();
           <div className="hidden md:flex space-x-6">
             <a href="/" className="text-black hover:text-red-600 transition duration-300">Home</a>
             <a href="/about" className="text-black hover:text-red-600 transition duration-300">About</a>
-            <a href="/donors" className="text-black hover:text-red-600 transition duration-300">Find a Donor</a>
+            <a href="/api/donations" className="text-black hover:text-red-600 transition duration-300">Find a Donor</a>
+
             <a href="/chat" className="text-black hover:text-red-600 transition duration-300">Chat</a>
           </div>
 
@@ -115,7 +116,8 @@ const navigate = useNavigate();
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a href="/" className="block text-black hover:text-red-600 hover:bg-white w-full transition duration-300">Home</a>
             <a href="/about" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">About</a>
-            <a href="/donors" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">Donors List</a>
+            <a href="/api/donations" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">Donors List</a>
+
             <a href="/chat" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">Chat</a>
           </div>
         </div>
