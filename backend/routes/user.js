@@ -53,11 +53,10 @@ router.post('/register', async (req, res) => {
 
     res.status(201).json({ result: newUser, token });
   } catch (error) {
+    console.error('Registration error:', error); // Improved error logging
     res.status(500).json({ message: 'Something went wrong' });
-    console.error(error);
   }
 });
-
 
 // User login
 router.post('/login', async (req, res) => {

@@ -9,7 +9,6 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { NotificationContext } from '../context/NotificationContext';
-import { FaClipboard } from 'react-icons/fa'; // Importing icons
 import Swal from 'sweetalert2';
 
 const Register = () => {
@@ -37,7 +36,8 @@ const Register = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true); // Set loading to true
-            const response = await axios.post('http://localhost:5000/api/users/register', result); 
+            const response = await axios.post('http://localhost:5000/api/users/register', data); 
+
             setLoading(false); // Set loading to false after request
             const { token, result } = response.data;
             localStorage.setItem('token', token);
@@ -50,7 +50,8 @@ const Register = () => {
             });
         } catch (error) {
             console.error('Registration failed:', error.response?.data?.message || error.message);
-            alert('Registration failed. Please try again.');
+            addNotification('Registration failed. Please try again.', 'error');
+
         }
     };
 
@@ -58,14 +59,10 @@ const Register = () => {
         <div className="min-h-screen flex items-center justify-center p-6">
             <div className="w-full max-w-md overflow-hidden">
                 <div className="p-8">
-                    {loading ? ( // Conditional rendering for loader
-                        <ThreeDots color="#red" height={80} width={80} />
 
-                    ) : (
                         <h2 className="text-3xl font-bold text-red-700 mb-6 text-center">
                             Create Account
                         </h2>
-                    )}
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">

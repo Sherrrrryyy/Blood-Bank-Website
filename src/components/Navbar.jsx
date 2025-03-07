@@ -8,11 +8,10 @@ const Navbar = () => {
   const [isUserExist, setIsUserExist] = useState(false);
   const { notifications } = useContext(NotificationContext);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-  
-    const getUser = localStorage.getItem('user');
+    const getUser = localStorage.getItem('result');
 
     if (getUser) {
       setIsUserExist(true);
@@ -29,13 +28,16 @@ const navigate = useNavigate();
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const logOutUser = () =>{
+  const logOutUser = () => {
     localStorage.removeItem('result');
     localStorage.removeItem('token');
     navigate('/login');
     setIsUserExist(false);
-  
-  }
+  };
+
+  const naviagteToDashboard = () => {
+    navigate('/profile');
+  };
 
   return (
     <nav className="rounded-full w-full">
@@ -53,7 +55,6 @@ const navigate = useNavigate();
             <a href="/" className="text-black hover:text-red-600 transition duration-300">Home</a>
             <a href="/about" className="text-black hover:text-red-600 transition duration-300">About</a>
             <a href="/api/donations" className="text-black hover:text-red-600 transition duration-300">Find a Donor</a>
-
             <a href="/chat" className="text-black hover:text-red-600 transition duration-300">Chat</a>
           </div>
 
@@ -89,9 +90,8 @@ const navigate = useNavigate();
                   </button>
                   {isDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
-                      <a href="/profile" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Profile</a>
-                      <a href="/activities" className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Activities</a>
-                      <button><a onClick={logOutUser} className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Logout</a></button>
+                      <Link onClick={naviagteToDashboard}><button className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100">Profile</button></Link>
+                   <button  onClick={logOutUser} className="block px-4 py-2 text-sm text-gray-900 hover:bg-red-100"><Link>Logout</Link></button>
                     </div>
                   )}
                 </div>
@@ -117,7 +117,6 @@ const navigate = useNavigate();
             <a href="/" className="block text-black hover:text-red-600 hover:bg-white w-full transition duration-300">Home</a>
             <a href="/about" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">About</a>
             <a href="/api/donations" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">Donors List</a>
-
             <a href="/chat" className="block text-black hover:text-red-600 hover:bg-white transition duration-300">Chat</a>
           </div>
         </div>

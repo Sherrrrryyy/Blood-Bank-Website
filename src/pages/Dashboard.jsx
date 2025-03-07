@@ -14,7 +14,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    const userToken = localStorage.getItem('userToken');
+    const userToken = localStorage.getItem('token');
     if (!userToken) {
       navigate('/login');
     }
@@ -36,9 +36,10 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className='bg-gray-300 flex-1 p-4'>
-      </div>
+    
     </div>
+
+    
   );
 }
 
