@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import { NotificationProvider } from './context/NotificationContext.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import DonationFrom from './pages/DonationFrom.jsx';
 
 createRoot(document.getElementById('root')).render(
   <NotificationProvider>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/signup" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Dashboard />} />
+        <Route path="/donationForm" element={<DonationFrom />} />
       </Routes>
     </Router>
   </NotificationProvider>,
